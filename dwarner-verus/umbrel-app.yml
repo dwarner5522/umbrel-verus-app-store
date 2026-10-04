@@ -4,7 +4,7 @@ storage:
   dataRoot: data
 category: crypto
 name: Verus Node
-version: "1.2.18"
+version: "1.2.18-1"
 tagline: Run your personal Verus node and daemon
 description: >-
   Run your own Verus (VRSC) full node, powered by the official Verus daemon (verusd). Independently store and validate every Verus block and transaction,
@@ -25,7 +25,11 @@ description: >-
 
 
   This is a community package and is not maintained by the Verus Coin Foundation. It runs the unmodified official verusd release.
-releaseNotes: ""
+releaseNotes: >-
+  This update fixes the connection details so the full RPC password is shown, and makes the Copy buttons work when Umbrel is opened over http.
+
+
+  The Verus daemon is unchanged (v1.2.18). Your node restarts during the update and keeps its blockchain and wallet.
 developer: Verus Coin Foundation
 website: https://verus.io
 dependencies: []
