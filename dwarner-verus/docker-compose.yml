@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: dwarner-verus_app_1
+      APP_PORT: 3000
+
+  app:
+    image: ghcr.io/dwarner5522/umbrel-verus:v1.2.18@sha256:bdd3de1f5aa439b217b51152bd73d62b037c94b1635c5a1138b788956e3d7bdd
+    user: "1000:1000"
+    init: true
+    restart: on-failure
+    # verusd flushes its chainstate to disk on shutdown
+    stop_grace_period: 5m
+    # these ports are exposed for external connections to verusd
+    ports:
+      - "${APP_VERUS_P2P_PORT}:${APP_VERUS_P2P_PORT}"
+      - "${APP_VERUS_RPC_PORT}:${APP_VERUS_RPC_PORT}"
+    volumes:
+      - ${APP_DATA_DIR}/data/verus:/data # .komodo/VRSC (chain, wallet, conf) and .zcash-params
+    environment:
+      # VERUSD SETTINGS
+      # VERUSD_EXTRA_ARGS is a comma-delimited list of extra startup flags to pass to verusd
+      APPS_SUBNET: "${NETWORK_IP}/16" # used for rpcallowip
+      P2P_PORT: "${APP_VERUS_P2P_PORT}"
+      RPC_PORT: "${APP_VERUS_RPC_PORT}"
+      RPC_USER: "${APP_VERUS_RPC_USER}" # also shown in the connect details
+      RPC_PASS: "${APP_VERUS_RPC_PASS}" # also shown in the connect details
+
+      # CONNECTION DETAILS (shown to user in the app)
+      DEVICE_DOMAIN_NAME: "${DEVICE_DOMAIN_NAME}"

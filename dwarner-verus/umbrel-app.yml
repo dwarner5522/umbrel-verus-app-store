@@ -1,0 +1,80 @@
+manifestVersion: 1
+id: dwarner-verus
+storage:
+  dataRoot: data
+category: crypto
+name: Verus Node
+version: "1.2.18"
+tagline: Run your personal Verus node and daemon
+description: >-
+  Run your own Verus (VRSC) full node, powered by the official Verus daemon (verusd). Independently store and validate every Verus block and transaction,
+  and connect your wallets, miners, and other software directly to your own node instead of trusting someone else's.
+
+
+  The app shows your node's sync progress, peers, network hashrate, and blockchain size at a glance, along with the RPC and P2P details you need to connect to it.
+
+
+  On first start the app downloads the zk-SNARK parameters Verus needs (about 780 MB, one time) and then begins syncing the blockchain.
+  A full sync from the first block can take days. To get going faster, use "Sync from bootstrap" in the app to download a recent copy of the blockchain published by the Verus project (about 25 GB).
+
+
+  The Verus daemon needs at least 4 GB of free memory and around 60 GB of storage.
+
+
+  To accept incoming connections from other Verus nodes, forward port 27485 on your router to your Umbrel.
+
+
+  This is a community package and is not maintained by the Verus Coin Foundation. It runs the unmodified official verusd release.
+releaseNotes: ""
+developer: Verus Coin Foundation
+website: https://verus.io
+dependencies: []
+repo: https://github.com/dwarner5522/umbrel-verus
+support: https://github.com/dwarner5522/umbrel-verus/issues
+port: 2113
+gallery: []
+path: ""
+icon: https://raw.githubusercontent.com/dwarner5522/umbrel-verus/HEAD/icon.svg
+defaultUsername: ""
+defaultPassword: ""
+widgets:
+  - id: "stats"
+    type: "four-stats"
+    refresh: "5s"
+    endpoint: "app:3000/api/widget/stats"
+    link: ""
+    example:
+      type: "four-stats"
+      link: ""
+      items:
+        - title: "Connections"
+          text: "16"
+          subtext: "peers"
+        - title: "Mempool"
+          text: "12"
+          subtext: "txs"
+        - title: "Hashrate"
+          text: "1.1"
+          subtext: "TH/s"
+        - title: "Blockchain size"
+          text: "32"
+          subtext: "GB"
+  - id: "sync"
+    type: "text-with-progress"
+    refresh: "2s"
+    endpoint: "app:3000/api/widget/sync"
+    link: ""
+    example:
+      type: "text-with-progress"
+      link: ""
+      title: "Blockchain sync"
+      text: "83%"
+      progressLabel: "In progress"
+      progress: 0.83
+backupIgnore:
+  - data/verus/.komodo/VRSC/blocks
+  - data/verus/.komodo/VRSC/chainstate
+  - data/verus/.komodo/VRSC/VRSC-bootstrap.tar.gz
+  - data/verus/.zcash-params
+submitter: dwarner5522
+submission: https://github.com/dwarner5522/umbrel-verus-app-store
